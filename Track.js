@@ -17,7 +17,7 @@ class Track {
    * @param {Array<String>} timingFunctions
    *  A list of timing functions to be used with each animation in `self`.
    *
-   * @param {Array<Double>} times
+   * @param {Array<Number>} times
    *  A list of pairs of times representing the starting and ending times of each animation in `self`.
    *  
    * @param {HTMLElement} element
@@ -36,7 +36,7 @@ class Track {
   }
 
   /**
-    * @return
+    * @return {Array<Animation>}
     * Returns the list of animations for `self`.
     */
   createAllAnimations() {
