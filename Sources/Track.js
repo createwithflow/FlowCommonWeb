@@ -1,9 +1,11 @@
 /**
 * Class representing the Track of animations for a specific property of an element. A Track contains
-* a list of animations that will used manipulate a specific property of an HTML Element. 
+* a list of animations that will used manipulate a specific property of an HTML Element.
 *
 * Made with Flow
 */
+
+// eslint-disable-next-line no-unused-vars
 class Track {
   /**
    * @constructor
@@ -18,8 +20,9 @@ class Track {
    *  A list of timing functions to be used with each animation in `self`.
    *
    * @param {Array<Number>} times
-   *  A list of pairs of times representing the starting and ending times of each animation in `self`.
-   *  
+   *  A list of pairs of times representing the starting and ending
+   * times of each animation in `self`.
+   *
    * @param {HTMLElement} element
    *  The HTML Element the animation will be manipulating.
    *
@@ -40,15 +43,18 @@ class Track {
     * Returns the list of animations for `self`.
     */
   createAllAnimations() {
-    let animations = [];
+    const animations = [];
+    // eslint-disable-next-line no-restricted-syntax
     for (const [index, timingFunction] of this.timingFunctions.entries()) {
-        let from = this.values[index];
-        let to = this.values[index + 1];
-        let startTime = this.times[index];
-        let endTime = this.times[index + 1];
-        let id = `${this.element}${this.property}${index}`
+      const from = this.values[index];
+      const to = this.values[index + 1];
+      const startTime = this.times[index];
+      const endTime = this.times[index + 1];
+      const id = `${this.element}${this.property}${index}`;
       animations.push(
-        new Animation(this.element, this.property, from, to, id, startTime, endTime, timingFunction)
+        new Animation(
+          this.element, this.property, from, to, id, startTime, endTime, timingFunction,
+        ),
       );
     }
     return animations;
