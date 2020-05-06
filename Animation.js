@@ -51,7 +51,7 @@ class Animation {
   }
 
   /**
-    * @return
+    * @return {Animation}
     * Returns an animation to be interpreted by the `Web Animations API`. https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API.
     */
   createWebAnimation() {
@@ -70,7 +70,7 @@ class Animation {
   }
 
   /**
-    * @return
+    * @return {Number}
     * Returns the duration of `self`.
     */
   duration() {
@@ -105,7 +105,7 @@ class Animation {
   }
 
   /**
-    * @return
+    * @return {String}
     * Returns the current `playState` of `self`.
     */
   get playState() {
@@ -116,7 +116,7 @@ class Animation {
    * @set
    * Sets the currentTime of `self`.
    *
-   * @param time
+   * @param {Number} time
    * A numeric value representing time in milliseconds.
    */
   set currentTime(time) {
@@ -124,7 +124,7 @@ class Animation {
   }
 
   /**
-   * @return
+   * @return {Number}
    * Returns the currentTime of `self`.
    */
   get currentTime() {

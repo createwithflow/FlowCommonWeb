@@ -35,7 +35,7 @@ class Player {
   }
 
   /**
-   * @return
+   * @return {Timeline}
    * Returns the value of timeline for `self`.
    */
   get timeline() {
@@ -46,7 +46,7 @@ class Player {
    * @set
    * Sets the timeline of self to timeline, pauses the playback and sets the current time to zero.
    *
-   * @param timeline
+   * @param {Timeline} timeline
    * Animation to be played.
    *
    */
@@ -78,7 +78,7 @@ class Player {
   }
 
   /**
-   * @return
+   * @return {Number}
    * Returns the duration of the timeline of self, or 0 if timeline is null.
    */
   get duration() {
@@ -86,7 +86,7 @@ class Player {
   }
 
   /**
-   * @return
+   * @return {Number}
    * Returns the currentTime of self, or null if timeline is null.
    */
   get currentTime() {
@@ -97,7 +97,7 @@ class Player {
    * @set
    * Sets the currentTime of self.
    *
-   * @param time
+   * @param {Number} time
    * A numeric value representing time in milliseconds.
    */
   set currentTime(time) {
@@ -135,7 +135,7 @@ class Player {
   }
 
   /**
-   * @return
+   * @return {Boolean}
    * Returns true if self is currently playing an animation and false otherwise.
    */
   isPlaying() {

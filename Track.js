@@ -36,7 +36,7 @@ class Track {
   }
 
   /**
-    * @return
+    * @return {Array<Animation>}
     * Returns the list of animations for `self`.
     */
   createAllAnimations() {

@@ -34,7 +34,7 @@ class ToggleButton {
   }
 
   /**
-   * @return
+   * @return {Boolean}
    * Returns true if the `self` is currently being animated, otherwise returns false.
    */
   isAnimating() {
@@ -88,13 +88,13 @@ class ToggleButton {
  * @param {String} resourcesPath
  *  The path pointing to the root of the Timeline folder.
  *
- * @param {timeline} ForwardTimeline
+ * @param {Timeline} ForwardTimeline
  *  The type of animation played when button transitions from on to off.
  * 
- * @param ReverseTimeline
+ * @param {Timeline} ReverseTimeline
  *  The type of animation played when button transitions from on to off.
  * 
- * @return
+ * @return {function}
  *  A callback function which is executed when the toggle button is clicked.
  */
 
