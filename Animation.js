@@ -20,7 +20,7 @@ class Animation {
    * @param {String} to
    *  The value of the property being animated at time duration of `self`.
    *
-   * @param {Double} startTime
+   * @param {Number} startTime
    *  The time the animation will begin.
    *  
    * @param {Array<Animation>} endTime
