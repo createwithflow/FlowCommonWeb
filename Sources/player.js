@@ -23,7 +23,7 @@ class Player {
    */
   constructor(timeline, timer, loop, delay, callback) {
     this.delay = delay;
-    if (typeof timer === "string" || timer instanceof String) {
+    if (typeof timer === 'string' || timer instanceof String) {
       this.timer = document.getElementById(timer);
     } else {
       this.timer = timer;
@@ -64,7 +64,7 @@ class Player {
     } else {
       this.timingAnimation = this.timer.animate(
         {},
-        this.timeline.duration + this.delay
+        this.timeline.duration + this.delay,
       );
       this.timeline.loadSVGAnimations();
       this.timingAnimation.currentTime = 0;
@@ -105,12 +105,14 @@ class Player {
       return;
     }
 
-    for (const animation of this.animations) {
+    this.animations.forEach((animation) => {
       animation.currentTime = time;
-    }
-    for (const shape of this.timeline.allShapes) {
+    });
+
+    this.timeline.allShapes.forEach((shape) => {
       shape.setCurrentTime(time / 1000);
-    }
+    });
+
     this.timingAnimation.currentTime = time;
   }
 
@@ -119,19 +121,19 @@ class Player {
    * and the animation is not currently playing.
    */
   play() {
-    if (this.timeline === null || this.isPlaying() == true) {
+    if (this.timeline == null || this.isPlaying() === true) {
       return;
     }
 
     this.timingAnimation.play();
-    for (const animation of this.animations) {
+    this.animations.forEach((animation) => {
       animation.play();
-    }
-    for (const shape of this.timeline.allShapes) {
-      var t = shape.getCurrentTime() % this.timeline.duration;
+    });
+    this.timeline.allShapes.forEach((shape) => {
+      const t = shape.getCurrentTime() % this.timeline.duration;
       shape.setCurrentTime(t);
       shape.unpauseAnimations();
-    }
+    });
   }
 
   /**
@@ -142,7 +144,7 @@ class Player {
     if (this.timingAnimation == null) {
       return false;
     }
-    return this.timingAnimation.playState == "running";
+    return this.timingAnimation.playState === 'running';
   }
 
   /**
@@ -154,12 +156,12 @@ class Player {
     }
 
     this.timingAnimation.pause();
-    for (const animation of this.animations) {
+    this.animations.forEach((animation) => {
       animation.pause();
-    }
-    for (const shape of this.timeline.allShapes) {
+    });
+    this.timeline.allShapes.forEach((shape) => {
       shape.pauseAnimations();
-    }
+    });
   }
 
   /**
@@ -183,7 +185,7 @@ class Player {
       return;
     }
     this.timingAnimation.onfinish = () => {
-      if (this.loop == true) {
+      if (this.loop === true) {
         this.currentTime = 0;
       } else {
         this.pause();
@@ -200,24 +202,25 @@ class Player {
    * Converts a numeric value representing a time in milliseconds into a string.
    */
   static convertTimeToString(milliseconds) {
-    var date = new Date(null);
+    const date = new Date(null);
     date.setMilliseconds(milliseconds);
     return date.toISOString().substr(14, 8);
   }
 }
 
+// eslint-disable-next-line no-unused-vars
 function createPlayer(
-  timeline,
+  Timeline,
   timerID,
   loop,
   delay,
   callback,
   rootID,
-  resourcesPath
+  resourcesPath,
 ) {
-  let shadowDomContainer = document.getElementById(rootID);
-  let shadowRoot = shadowDomContainer.shadowRoot;
-  let timer = shadowRoot.getElementById(timerID);
-  let forwardTimeline = new timeline(shadowRoot, resourcesPath);
+  const shadowDomContainer = document.getElementById(rootID);
+  const { shadowRoot } = shadowDomContainer;
+  const timer = shadowRoot.getElementById(timerID);
+  const forwardTimeline = new Timeline(shadowRoot, resourcesPath);
   return new Player(forwardTimeline, timer, loop, delay, callback);
 }

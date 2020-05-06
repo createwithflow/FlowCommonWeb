@@ -48,7 +48,7 @@ class ToggleButton {
    *  The new state of `self`.
    *
    */
-  setState(state, time=0) {
+  setState(state, time = 0) {
     this.player.timeline = this.state
       ? this.reverseTimeline
       : this.forwardTimeline;
@@ -57,17 +57,18 @@ class ToggleButton {
   }
 
   /**
-   * Toggles the state of `self` and animates the state transition if `animated` is true. Then calls the player's call back function.
+   * Toggles the state of `self` and animates the state transition if `animated` is true.
+   * Then calls the player's call back function.
    *
    * @param {Boolean} animated
    *  Determines whether or not to animate the state transtion of `self`.
    */
   toggle(animated) {
     if (this.isAnimating()) {
-      let newTime = this.player.duration - this.player.currentTime
+      const newTime = this.player.duration - this.player.currentTime;
       this.setState(!this.state, newTime);
     } else {
-      this.setState(!this.state)
+      this.setState(!this.state);
     }
 
     if (animated) {
@@ -90,30 +91,33 @@ class ToggleButton {
  *
  * @param {Timeline} ForwardTimeline
  *  The type of animation played when button transitions from on to off.
- * 
+ *
  * @param {Timeline} ReverseTimeline
  *  The type of animation played when button transitions from on to off.
- * 
+ *
  * @return {function}
  *  A callback function which is executed when the toggle button is clicked.
  */
 
-function createToggleButton(rootID, callback, elementID, resourcesPath, ForwardTimeline, ReverseTimeline) {
-  let shadowDomContainer = document.getElementById(rootID);
-  let shadowRoot = shadowDomContainer.shadowRoot;
-  let timer = shadowRoot.getElementById("timerID");
+// eslint-disable-next-line no-unused-vars
+const createToggleButton = function createToggleButton(
+  rootID, callback, elementID, resourcesPath, ForwardTimeline, ReverseTimeline,
+) {
+  const shadowDomContainer = document.getElementById(rootID);
+  const { shadowRoot } = shadowDomContainer;
+  const timer = shadowRoot.getElementById('timerID');
 
-  //ID of the shadow dom container, do not change.
-  let container = shadowRoot.getElementById("flowComponentContainerID");
-  container.setAttribute("onclick", `${rootID}.toggle(true)`)
+  // ID of the shadow dom container, do not change.
+  const container = shadowRoot.getElementById('flowComponentContainerID');
+  container.setAttribute('onclick', `${rootID}.toggle(true)`);
 
-  let forwardTimeline = new ForwardTimeline(shadowRoot, elementID, resourcesPath);
-  let reverseTimeline = new ReverseTimeline(shadowRoot, elementID, resourcesPath);
+  const forwardTimeline = new ForwardTimeline(shadowRoot, elementID, resourcesPath);
+  const reverseTimeline = new ReverseTimeline(shadowRoot, elementID, resourcesPath);
   return new ToggleButton(
     forwardTimeline,
     reverseTimeline,
     timer,
     false,
-    callback
+    callback,
   );
-}
+};
