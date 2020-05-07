@@ -16,6 +16,7 @@ module.exports = {
   rules: {
     "no-underscore-dangle": 0,
     "no-param-reassign": 0,
-    "no-undef": 0
+    "no-undef": 0,
+    "function-paren-newline": 0,
   },
 };
