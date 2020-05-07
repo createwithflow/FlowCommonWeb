@@ -8,7 +8,7 @@ Dir.each_child("Sources") {|filename|
         puts "ESLinting #{filename}"
         if fix
             abort unless system "cd Sources && npx eslint #{filename} --fix"
-            else
+        else
             abort unless system "cd Sources && npx eslint #{filename}"
         end
     end
