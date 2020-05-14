@@ -39,8 +39,7 @@ class Animation {
     id,
     startTime,
     endTime,
-    timingFunction,
-  ) {
+    timingFunction) {
     this.element = element;
     this.property = property;
     this.from = from;

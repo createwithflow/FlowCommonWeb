@@ -53,9 +53,14 @@ class Track {
       const id = `${this.element}${this.property}${index}`;
       animations.push(
         new Animation(
-          this.element, this.property, from, to, id, startTime, endTime, timingFunction,
-        ),
-      );
+          this.element,
+          this.property,
+          from,
+          to,
+          id,
+          startTime,
+          endTime,
+          timingFunction));
     }
     return animations;
   }

@@ -101,8 +101,7 @@ class ToggleButton {
 
 // eslint-disable-next-line no-unused-vars
 const createToggleButton = function createToggleButton(
-  rootID, callback, elementID, resourcesPath, ForwardTimeline, ReverseTimeline,
-) {
+  rootID, callback, elementID, resourcesPath, ForwardTimeline, ReverseTimeline) {
   const shadowDomContainer = document.getElementById(rootID);
   const { shadowRoot } = shadowDomContainer;
   const timer = shadowRoot.getElementById('timerID');
@@ -118,6 +117,5 @@ const createToggleButton = function createToggleButton(
     reverseTimeline,
     timer,
     false,
-    callback,
-  );
+    callback);
 };

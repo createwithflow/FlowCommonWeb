@@ -64,8 +64,8 @@ class Player {
     } else {
       this.timingAnimation = this.timer.animate(
         {},
-        this.timeline.duration + this.delay,
-      );
+        this.timeline.duration + this.delay);
+
       this.timeline.loadSVGAnimations();
       this.timingAnimation.currentTime = 0;
       this.timingAnimation.pause();
@@ -216,8 +216,7 @@ function createPlayer(
   delay,
   callback,
   rootID,
-  resourcesPath,
-) {
+  resourcesPath) {
   const shadowDomContainer = document.getElementById(rootID);
   const { shadowRoot } = shadowDomContainer;
   const timer = shadowRoot.getElementById(timerID);
