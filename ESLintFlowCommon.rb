@@ -2,14 +2,16 @@
 
 fix = ARGV.include? '--fix'
 
-Dir.each_child("Sources") {|filename|
+sourcesPath = "Sources/FlowCommonWebFiles"
+
+Dir.each_child(sourcesPath) {|filename|
     #excluding minified files
     if !filename.include? ".min"
         puts "ESLinting #{filename}"
         if fix
-            abort unless system "cd Sources && npx eslint #{filename} --fix"
+            abort unless system "cd #{sourcesPath} && npx eslint #{filename} --fix"
         else
-            abort unless system "cd Sources && npx eslint #{filename}"
+            abort unless system "cd #{sourcesPath} && npx eslint #{filename}"
         end
     end
 }
