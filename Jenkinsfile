@@ -11,5 +11,13 @@ pipeline {
                 sh './ESLintFlowCommon.rb'
             }
         }
+        stage('Minify files') {
+            steps {
+                sh 'npm i uglify-js-es6 -g'
+                sh 'uglifyjs --version'
+                sh './minify.rb'
+            }
+        }
+
     }
 }
