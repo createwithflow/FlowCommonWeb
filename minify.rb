@@ -6,9 +6,6 @@ flowCommonWebFiles = "Track.js Animation.js player.js web-animations.min.js Togg
 outputDir = "#{__dir__}"
 filename = "flowcommon.min.js"
 
-abort unless system "cd #{flowCommonWebDir} && uglifyjs #{flowCommonWebFiles} --output #{outputDir}/#{filename}"
+abort unless system "cd #{flowCommonWebDir} && uglifyjs #{flowCommonWebFiles} --compress --output #{outputDir}/#{filename}"
 
 puts "Successfully Minified FlowCommonWeb files!"
-
-
-
