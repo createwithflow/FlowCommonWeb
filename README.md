@@ -13,8 +13,6 @@ Working with WAAPI can be difficult, so to make things as clean as possible, Flo
 
 Within FlowCommon - Web are the following classes:
 
-* Animation – a wrapper for managing a single animation.
-* Track – a wrapper for managing sets of consecutive animations for a single property.
 * Player – a class for controlling playback of a Timeline.
 
 As Flow matures and new exports are added, this list will continue to grow.
@@ -46,8 +44,6 @@ Add a `flowCommon.js` file to your project:
 ```js
 function createCommonScripts(commonFolderPath) {
   let sources = [
-    `${commonFolderPath}/Animation.js`,
-    `${commonFolderPath}/Track.js`,
     `${commonFolderPath}/Player.js`,
     //optionally add a local version of web-animations
     `${commonFolderPath}/web-animations.min.js`,
@@ -81,17 +77,6 @@ You will have to modify the `commonFolderPath` to suit your needs.
 
 ## Classes
 There are 3 core classes to the FlowCommon-Web package. 
-
-### Animation
-The Animation class contains all the logic necessary to create and control instances of web-animations.
-
-Check out our documentation here: [Animation Class (Web)](https://createwithflow.com/api/flowcommon/web/animation/)
-
-### Track
-The Track class represents a sequence of animations for a specific property of an element. A Track contains
-a list of animations that will used manipulate a specific property of an HTML Element. 
-
-Check out our documentation here: [Track Class (Web)](https://createwithflow.com/api/flowcommon/web/track/)
 
 ### Player
 An Player is an object used to manage the playback of a Timeline created from Flow. You can reuse the player instance by changing its `timeline`.
