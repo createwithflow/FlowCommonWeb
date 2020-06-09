@@ -1,6 +1,6 @@
 {
   "name": "flowcommonweb",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "**When you export a Flow project to HTML, React, or anything Web-related, Flow includes a set of helper classes and extensions that help manage and control your animations. This page provides and overview and a link to each of these files.**",
   "main": "player.js",
   "scripts": {
