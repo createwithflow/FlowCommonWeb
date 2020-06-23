@@ -51,6 +51,9 @@ class Player {
    *
    */
   set timeline(timeline) {
+    //  Making the animations array null before setting the timeline fixes the safari glitch.
+    this.animations = [];
+
     if (this._timeline != null) {
       this.pause();
     }
