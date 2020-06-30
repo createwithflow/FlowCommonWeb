@@ -53,9 +53,7 @@ class Player {
   set timeline(timeline) {
     // Work around for Safari bug. More detail provided in the
     // comment above the cancelAnimations function in this file.
-
     this.cancelAnimations();
-    // End of work around.
 
     if (this._timeline != null) {
       this.pause();
