@@ -51,6 +51,10 @@ class Player {
    *
    */
   set timeline(timeline) {
+    // Work around for Safari bug. More detail provided in the
+    // comment above the cancelAnimations function in this file.
+    this.cancelAnimations();
+
     if (this._timeline != null) {
       this.pause();
     }
@@ -114,6 +118,21 @@ class Player {
     });
 
     this.timingAnimation.currentTime = time;
+  }
+
+  /**
+   * Work around for Safari. When switching from one timeline to
+   * another Safari will jump to a random point in the first
+   * timeline unless the effect target of each animation is set to null.
+   * This is to ensure that Safari cannot access any animation from the previous
+   * timeline.
+   */
+  cancelAnimations() {
+    if (this.animations === undefined || this.animations === null) { return; }
+    this.animations.forEach((animation) => {
+      animation.effect.target = null;
+    });
+    this.animations = [];
   }
 
   /**
