@@ -235,10 +235,11 @@ function createPlayer(
   delay,
   callback,
   rootID,
+  elementID,
   resourcesPath) {
   const shadowDomContainer = document.getElementById(rootID);
   const { shadowRoot } = shadowDomContainer;
   const timer = shadowRoot.getElementById(timerID);
-  const forwardTimeline = new Timeline(shadowRoot, resourcesPath);
+  const forwardTimeline = new Timeline(shadowRoot, elementID, resourcesPath);
   return new Player(forwardTimeline, timer, loop, delay, callback);
 }
