@@ -1,5 +1,5 @@
 # Common Files for Web
-**When you export a Flow project to HTML, React, or anything Web-related, Flow includes a set of helper classes and extensions that help manage and control your animations. This page provides and overview and a link to each of these files.**
+**When you export a Flow project to HTML, React, or anything Web-related, Flow includes a set of helper classes and extensions that help manage and control your animations. This page provides an overview and a link to each of these files.**
 
 A major goal behind our efforts here at Flow is to produce the cleanest code possible. For any platform, this means conforming to industry standards. For Web, in particular, it means staying away from 3rd party libraries and adopting the future of natively supported cross-browser animations - a.k.a the [Web Animations API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API) (WAAPI).
 
@@ -9,7 +9,7 @@ A major goal behind our efforts here at Flow is to produce the cleanest code pos
 There are a lot of reasons for adopting WAAPI. Primarily, it is on-track to being the only cross-browser API and even though portions of the API aren't fully supported by every browser, there is a polyfill that covers 99.9% of the gaps. Also, WAAPI is indcredibly performant. 
 
 ## Overview
-Working with WAAPI can be difficult, so to make things as clean as possible, Flow requires a few light weight classes for organizing and automating the construction of native web-animations.
+Working with WAAPI can be difficult, so to make things as clean as possible, Flow requires a few lightweight classes for organizing and automating the construction of native web-animations.
 
 Within FlowCommon - Web are the following classes:
 
