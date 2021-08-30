@@ -5,8 +5,9 @@ puts "Minifying FlowCommonWeb files."
 flowCommonWebDir = "#{__dir__}/Sources/FlowCommonWebFiles"
 waapi = "web-animations.min.js"
 flowCommonWebFiles = [
-    "player.js",
-    "ToggleButton.js"
+    "Player.js",
+    "ToggleButton.js",
+    "HoverElement.js"
 ]
 
 outputDir = "#{__dir__}/generated"

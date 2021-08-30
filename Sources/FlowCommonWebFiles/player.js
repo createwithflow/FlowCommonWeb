@@ -1,5 +1,5 @@
 /**
- * Class used for driving animations.
+ * The Player is a generic class for handling the loading, unloading, and playback of a `Timeline` to be associated with a DOM element. A player must be able to construct a timer – using an existing DOM element or ID – which handles timing and the execution of a callback on completion.
  */
 class Player {
   /**
@@ -9,13 +9,13 @@ class Player {
    *  Animation played when the transition is triggered.
    *
    * @param {String} timer
-   *  The HTML Element or the HTML Element ID for the Timer.
+   *  The HTML Element or the HTML Element ID to be used for handling the timer (i.e. timing animation) of `self`.
    *
    * @param {Boolean} loop
-   *  True if the animation should restart upon completion false otherwise.
+   *  This property specifies that the animation should repeat upon completion.
    *
    * @param {Boolean} delay
-   *  The time in milliseconds before the animation starts.
+   *  The number of milliseconds to delay the start of playback.
    *
    * @param {function: () -> Void} callback
    * A callback function passed to the player that runs upon animation completion.
@@ -36,7 +36,7 @@ class Player {
 
   /**
    * @return {Timeline}
-   * Returns the value of timeline for `self`.
+   * Returns the current timeline for `self`.
    */
   get timeline() {
     return this._timeline;
@@ -44,37 +44,43 @@ class Player {
 
   /**
    * @set
-   * Sets the timeline of self to timeline, pauses the playback and sets the current time to zero.
+   * Sets the timeline of `self` to `timeline`. When this variable is set, the player pauses playback then sets the new value. If the new value is `null` the current timing animation is removed, and default values are set in anticipation of a new timeline. If the new value is not `null` the timeline is prepped for playback.
    *
    * @param {Timeline} timeline
-   * Animation to be played.
+   * The timeline to be controlled by `self`.
    *
    */
   set timeline(timeline) {
     // Work around for Safari bug. More detail provided in the
-    // comment above the cancelAnimations function in this file.
+    // comment above the `cancelAnimations` function in this file.
     this.cancelAnimations();
 
+    // Pause the current timeline, if it exists
     if (this._timeline != null) {
       this.pause();
     }
-    this._timeline = timeline;
-    this._timeline.loadFillImages();
 
+    this._timeline = timeline;
+
+    // Prepare `self` to receive a new timeline, or initiate playback.
     if (this._timeline === null) {
       this.timingAnimation = null;
       this.currentTime = 0;
       this.shouldPlay = false;
     } else {
+      //Set up the timing animation, which is used to track the current playback time
       this.timingAnimation = this.timer.animate(
         {},
         this.timeline.duration + this.delay);
-
-      this.timeline.loadSVGAnimations();
       this.timingAnimation.currentTime = 0;
       this.timingAnimation.pause();
 
+      //Load all images, shapes, animations
+      this.timeline.loadFillImages();
+      this.timeline.loadSVGAnimations();
       this.animations = this.timeline.createAllAnimations();
+
+      //Prepare for playback
       this.shouldPlay = true;
       this.pause();
       this.setOnFinishCallback();
@@ -83,7 +89,7 @@ class Player {
 
   /**
    * @return {Number}
-   * Returns the duration of the timeline of self, or 0 if timeline is null.
+   * Returns the duration of the `timeline` of `self`, or `0` if timeline is `null`.
    */
   get duration() {
     return this.timeline === null ? 0 : this.timeline.duration;
@@ -91,7 +97,7 @@ class Player {
 
   /**
    * @return {Number}
-   * Returns the currentTime of self, or null if timeline is null.
+   * Returns the current playback time of `self`, or `0` if `timeline` is `null`.
    */
   get currentTime() {
     return this.timingAnimation === null ? 0 : this.timingAnimation.currentTime;
@@ -99,24 +105,28 @@ class Player {
 
   /**
    * @set
-   * Sets the currentTime of self.
+   * Sets the current playback time (in milliseconds) of `self`. This value is propagated to all animations in the current timeline.
    *
    * @param {Number} time
    * A numeric value representing time in milliseconds.
    */
   set currentTime(time) {
+    // There should always be both a timeline and a timing animation, if not do nothing
     if (this.timeline === null || this.timingAnimation === null) {
       return;
     }
 
+    // Set the time for all animations in the timeline
     this.animations.forEach((animation) => {
       animation.currentTime = time;
     });
 
+    // Set the time for all shapes (SVG/SMIL) in the timeline
     this.timeline.allShapes.forEach((shape) => {
       shape.setCurrentTime(time / 1000);
     });
 
+    // Set the time for the timing animation
     this.timingAnimation.currentTime = time;
   }
 
@@ -136,8 +146,7 @@ class Player {
   }
 
   /**
-   * Plays the animation if the timeline that belongs to `self` is not null
-   * and the animation is not currently playing.
+   * Plays the current timeline for `self`. If the player is currently playing, or the current timeline is `null` this function does nothing.
    */
   play() {
     if (this.timeline == null || this.isPlaying() === true) {
@@ -148,6 +157,8 @@ class Player {
     this.animations.forEach((animation) => {
       animation.play();
     });
+
+
     this.timeline.allShapes.forEach((shape) => {
       const t = shape.getCurrentTime() % this.timeline.duration;
       shape.setCurrentTime(t);
