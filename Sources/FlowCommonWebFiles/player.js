@@ -220,7 +220,7 @@ class Player {
       } else {
         this.pause();
       }
-      if (this.callback !== null) this.callback();
+      if (typeof this.callback != undefined && this.callback != null) this.callback();
     };
   }
 
